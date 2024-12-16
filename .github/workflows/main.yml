@@ -16,6 +16,5 @@ jobs:
       # ls -la выведет содержимое текущего репозитория
       - run: make setup
       - run: make test
-      - name: make lint
-      run: make lint
+      - run: make lint
       
