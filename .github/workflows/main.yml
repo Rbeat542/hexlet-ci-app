@@ -1,21 +1,22 @@
 # file: .github/workflows/main.yml
 name: main
 # on – определяет события, которые запускают воркфлоу
-on: push
+on:
+  - push
+
 jobs:
-  # build – произвольно выбранное имя задания
-  # их может быть больше одного
   build:
-    # операционная система для работы воркфлоу
+
     runs-on: ubuntu-latest
-    steps: # список шагов, которые надо выполнить
-      # экшен — выполняет какую-то задачу
-      # checkout — клонирует репозиторий
-      #- uses: actions/checkout@v4
-      # run – произвольная bash-команда
-      # ls -la выведет содержимое текущего репозитория
-      - run: make setup
-      - name: Testing
-      run: make test
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js '18.x'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+      - run: make install
       - run: make lint
-      
+      - run: make test
+      - uses: hexlet-components/hello-from-hexlet-action@release
